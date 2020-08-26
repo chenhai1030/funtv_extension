@@ -54,7 +54,7 @@ function switchShow(){
         imgDiv.style.display = 'block'
         let imgCheight 
         let len = imgDiv.childNodes.length
-        console.info("imgs:", len)
+        // console.info("imgs:", len)
         if (len > 6){
             imgCheight = "450px"
         }else if (len > 3){
@@ -143,7 +143,7 @@ function checkInfo(){
             data: keyword,                      //request param
             dataType: "json",
             success: function (response, xml) {
-                console.info("success!!")
+                // console.info("success!!")
                 let resObj =  JSON.parse(response)
                 // console.info(resObj)
                 imgarrs = resObj.data

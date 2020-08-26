@@ -16,9 +16,15 @@ function removeInjected(){
 }
 
 function closeModal(){
-	console.info("close modal")
 	let modalDiv = document.getElementById("FuntvModalDiv")
 	modalDiv.style.display = "none";
+}
+
+function checkESC(){
+	console.info("xxxx")
+	if (event.keyCode == 27) {
+		closeModal()
+	}
 }
 
 function addModal(){
@@ -27,6 +33,8 @@ function addModal(){
 		modalDiv = document.createElement("div")
 		modalDiv.id = "FuntvModalDiv"
 		modalDiv.classList.add("FuntvModalDiv")
+		modalDiv.contentEditable = "true"
+		modalDiv.addEventListener("keyup", checkESC)
 		document.body.appendChild(modalDiv)
 	}
 	if (modalDiv){
@@ -61,7 +69,7 @@ function showPreview(data){
 	}
 
 	window.addEventListener("message", function(e){
-		console.info('rec ：', e.data.data);
+		// console.info('rec ：', e.data.data);
 		if (e.data){
 			if(e.data.cmd == 'reinitIframe') {
 				reinitIframe(e.data.data)
