@@ -22,5 +22,7 @@ chrome.browserAction.onClicked.addListener(function () {
     chrome.tabs.insertCSS({
         file: 'styles/page.css'
     });
-
+    chrome.tabs.insertCSS({
+        file: 'styles/modal.css'
+    });
 });

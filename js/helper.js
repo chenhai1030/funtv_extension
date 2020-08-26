@@ -44,12 +44,8 @@ function formatParams(data) {
     return arr;
 }
 
-function removeIframe(){
-    sendMsg("removeIframe", "")
-}
-
 function close(){
-    removeIframe()
+    sendMsg("removeInjected", "")
 }
 
 function switchShow(){
@@ -79,20 +75,13 @@ function sendMsg(cmd, data){
     window.parent.postMessage({cmd: cmd, data: data}, '*');
 }
 
-function showPreview(e){
-    console.info("show preview")
-    console.info(e)
-    let modal = document.getElementById('myModal');
-    let imgID = e.path[0].attributes.id
-    
-    modal.style.display = "block"
-    modal.src = e.path[0].attributes.src
-    console.info(e.path[0].attributes.src)
-
-}
-
 function getItemNum(res){
     return res.total
+}
+
+function showPreview(e){
+    let data = e.path[0].attributes[0].nodeValue
+    sendMsg("preview", data)
 }
 
 function createImg(src, i){
@@ -108,7 +97,7 @@ function createImg(src, i){
         img.style.marginRight="5px"
     }
     imgDiv.appendChild(img)
-    // document.getElementById(img.id).addEventListener("click", showPreview)
+    document.getElementById(img.id).addEventListener("click", showPreview)
 }
 
 function prepareImg(num, resObj){
@@ -156,7 +145,7 @@ function checkInfo(){
             success: function (response, xml) {
                 console.info("success!!")
                 let resObj =  JSON.parse(response)
-                console.info(resObj)
+                // console.info(resObj)
                 imgarrs = resObj.data
                 let imgNums = getItemNum(resObj)
                 prepareImg(imgNums, resObj)
