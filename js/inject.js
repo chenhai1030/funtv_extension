@@ -18,10 +18,10 @@ function removeInjected(){
 function closeModal(){
 	let modalDiv = document.getElementById("FuntvModalDiv")
 	modalDiv.style.display = "none";
+	modalDiv.style.zIndex = "-1"
 }
 
 function checkESC(){
-	console.info("xxxx")
 	if (event.keyCode == 27) {
 		closeModal()
 	}
@@ -33,7 +33,7 @@ function addModal(){
 		modalDiv = document.createElement("div")
 		modalDiv.id = "FuntvModalDiv"
 		modalDiv.classList.add("FuntvModalDiv")
-		modalDiv.contentEditable = "true"
+		modalDiv.tabIndex = "-1"
 		modalDiv.addEventListener("keyup", checkESC)
 		document.body.appendChild(modalDiv)
 	}
@@ -44,13 +44,15 @@ function addModal(){
 }
 
 function showPreview(data){
-    let modal = document.getElementById('FuntvModalDiv');
+	let modal = document.getElementById('FuntvModalDiv');
 	document.getElementById("funtv-modal-content").src = data
 	document.getElementById("funtv-caption").innerHTML = "我是xx"
 	
 	if(modal){
 		modal.style.display = "block"
 		modal.style.zIndex = "999"
+		modal.style.outline = "none"
+		modal.focus()
 	}
 }
 
