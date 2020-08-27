@@ -117,7 +117,12 @@ function exChangePic(data){
 	img.src = data
 	img.onload = function(){
 		let base64 = getBase64Image(img)
-		let contentIframe = document.getElementsByTagName("iframe")[2]
+		let iframes = document.getElementsByTagName("iframe")
+		for (let i=0; i<iframes.length; i++){
+			if (iframes[i].dataset.src == "/admin/refine_task"){
+				var contentIframe = document.getElementsByTagName("iframe")[i] 
+			}
+		}
 		let exDiv = contentIframe.contentWindow.document.getElementsByClassName("img-still mod-editpic")
 		let mImg = exDiv[0].childNodes[2]
 		// console.info(mImg)
