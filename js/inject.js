@@ -1,7 +1,57 @@
+{
+let pageMouseX, pageMouseY
+let frameTop = 0
+let frameLeft = 0
+
+function getPageMouse(){
+
+}
+
+function setPageMouse(X, Y){
+
+}
+
+function handleDragStart (mouseX, mouseY) {
+	// 得出鼠标在上层的位置
+	pageMouseX = frameLeft + mouseX
+	pageMouseY = frameTop + mouseY
+  
+	document.addEventListener('mouseup', handleDragEnd)
+	document.addEventListener('mousemove', handlePageMousemove)
+  }
+  
+  function handleDragEnd () {
+	document.removeEventListener('mouseup', handleDragEnd)
+	document.removeEventListener('mousemove', handlePageMousemove)
+  }
+  
+  function handleFrameMousemove (offsetX, offsetY) {
+	let myIframe = document.getElementById("FuntvGalleryHelper")
+	frameTop += offsetY
+	frameLeft += offsetX
+	myIframe.style.top = frameTop + 'px'
+	myIframe.style.left = frameLeft + 'px'
+  
+	// 更新鼠标在上层的位置，补上偏移
+	pageMouseX += offsetX
+	pageMouseY += offsetY
+  }
+
+  function handlePageMousemove (evt) {
+	let myIframe = document.getElementById("FuntvGalleryHelper")
+	frameTop += evt.clientX - pageMouseX
+	frameLeft += evt.clientY - pageMouseY
+	myIframe.style.top = frameTop + 'px'
+	myIframe.style.left = frameLeft + 'px'
+  
+	// 新位置直接可以更新
+	pageMouseX = evt.clientX
+	pageMouseY = evt.clientY
+  }
+
 function reinitIframe(height){
 	let myIframe = document.getElementById("FuntvGalleryHelper")
 	myIframe.height = height
-	// console.info("h:", height)
 }
 
 function removeInjected(){
@@ -68,21 +118,33 @@ function showPreview(data){
 		document.documentElement.appendChild(myIframe)
 	}else{
 		removeInjected()
+		return
 	}
 
 	window.addEventListener("message", function(e){
-		// console.info('rec ：', e.data.data);
-		if (e.data){
-			if(e.data.cmd == 'reinitIframe') {
-				reinitIframe(e.data.data)
-			}
-			else if(e.data.cmd == 'removeInjected'){
-				removeInjected()
-			}
-			else if(e.data.cmd == 'preview'){
+		const data = e.data
+		// console.info("cmd:", data.cmd)
+		switch(data.cmd){
+			case 'reinitIframe':
+				reinitIframe(e.data.data)	
+				break
+			case 'removeInjected':
+				removeInjected() 
+				break
+			case 'preview':
 				showPreview(e.data.data)
-			}
+				break
+			case 'SALADICT_DRAG_START':
+				handleDragStart(data.mouseX, data.mouseY)
+				break
+			case 'SALADICT_DRAG_MOUSEMOVE':
+				handleFrameMousemove(data.offsetX, data.offsetY)
+				break
+			case 'SALADICT_DRAG_END':
+				handleDragEnd()
+				break
 		}
 	}, false);
 }();
 
+}

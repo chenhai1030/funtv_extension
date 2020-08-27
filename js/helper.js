@@ -1,5 +1,38 @@
-let imgarrs
-let serverip = "http://172.17.3.201/"
+var imgarrs
+var serverip = "http://172.17.3.201/"
+
+let baseMouseX, baseMouseY = 0
+
+function handleDragStart (evt) {
+    baseMouseX = evt.clientX
+    baseMouseY = evt.clientY
+
+    window.parent.postMessage({
+      cmd: 'SALADICT_DRAG_START',
+      mouseX: baseMouseX,
+      mouseY: baseMouseY
+    }, '*')
+  
+    document.addEventListener('mouseup', handleDragEnd)
+    document.addEventListener('mousemove', handleMousemove)
+}
+  
+function handleMousemove (evt) {
+    window.parent.postMessage({
+      cmd: 'SALADICT_DRAG_MOUSEMOVE',
+      offsetX: evt.clientX - baseMouseX,
+      offsetY: evt.clientY - baseMouseY
+    }, '*')
+}
+  
+function handleDragEnd () {
+    window.parent.postMessage({
+      cmd: 'SALADICT_DRAG_END'
+    }, '*')
+  
+    document.removeEventListener('mouseup', handleDragEnd)
+    document.removeEventListener('mousemove', handleMousemove)
+}
 
 function ajax(options) {
     options = options || {};
@@ -183,4 +216,8 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('imgContainer').onscroll = function(){
         waterfall(imgarrs)
     }
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('funtv-dragarea').addEventListener("mousedown", handleDragStart);
 });
