@@ -1,5 +1,7 @@
 var imgarrs
-var serverip = "http://172.17.3.201/"
+var timeoutID = null;
+// var serverip = "http://172.17.3.201/"
+var serverip = "http://172.17.7.11:8000/"
 
 let baseMouseX, baseMouseY = 0
 
@@ -109,12 +111,27 @@ function sendMsg(cmd, data){
 }
 
 function getItemNum(res){
-    return res.total
+    let num
+    if (res.total){
+        num = res.total
+    }else if(res.count){
+        num = res.count
+    }
+    return num
 }
 
 function showPreview(e){
+    clearTimeout(timeoutID)
     let data = e.path[0].attributes[0].nodeValue
-    sendMsg("preview", data)
+    timeoutID = window.setTimeout(function(){
+        sendMsg("preview", data)
+    }, 300);
+}
+
+function exChangePic(e){
+    clearTimeout(timeoutID); 
+    let data = e.path[0].attributes[0].nodeValue
+    sendMsg("exchange", data)
 }
 
 function createImg(src, i){
@@ -131,6 +148,7 @@ function createImg(src, i){
     }
     imgDiv.appendChild(img)
     document.getElementById(img.id).addEventListener("click", showPreview)
+    document.getElementById(img.id).addEventListener("dblclick", exChangePic)
 }
 
 function prepareImg(num, resObj){
@@ -141,13 +159,18 @@ function prepareImg(num, resObj){
     }
 
     if (num >0){
+        for (let i=1; i<=6 && i <= num; i++){
+            if(i >= 1){
+                imgDiv.style.height = '120px'     
+            }else if (i > 2){
+                imgDiv.style.height = '220px'
+            }
+            let imgSrc = serverip + resObj.data[i-1].imgUrl
+            createImg(imgSrc, i)
+        }
         if (num >= 6){
             imgDiv.style.height = '350px'
             imgDiv.style.overflow = 'scroll'
-        }
-        for (let i=1; i<=6; i++){
-            let imgSrc = serverip + resObj.data[i-1].imgUrl
-            createImg(imgSrc, i)
         }
         if (num >= 7){
             let img = document.createElement("img")
@@ -171,7 +194,7 @@ function checkInfo(){
     if (event.keyCode == 13) {
         let keyword=document.querySelector('[name="searchInput"]').value
         ajax({
-            url: serverip + "/api/search",     //request path
+            url: serverip + "api/search",     //request path
             type: "GET",                       //request type
             data: keyword,                      //request param
             dataType: "json",

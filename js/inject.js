@@ -3,13 +3,6 @@ let pageMouseX, pageMouseY
 let frameTop = 0
 let frameLeft = 0
 
-function getPageMouse(){
-
-}
-
-function setPageMouse(X, Y){
-
-}
 
 function handleDragStart (mouseX, mouseY) {
 	// 得出鼠标在上层的位置
@@ -106,6 +99,32 @@ function showPreview(data){
 	}
 }
 
+function getBase64Image(img){
+	var canvas = document.createElement("canvas");
+	canvas.width = img.width
+	canvas.height = img.height
+	var ctx = canvas.getContext("2d");
+	ctx.drawImage(img, 0, 0, img.width, img.height); 
+	var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+	var dataURL = canvas.toDataURL("image/" + ext);
+	// console.log(dataURL)
+	return dataURL;
+}
+
+function exChangePic(data){
+	var img = new Image();
+	img.crossOrigin = "";
+	img.src = data
+	img.onload = function(){
+		let base64 = getBase64Image(img)
+		let contentIframe = document.getElementsByTagName("iframe")[2]
+		let exDiv = contentIframe.contentWindow.document.getElementsByClassName("img-still mod-editpic")
+		let mImg = exDiv[0].childNodes[2]
+		// console.info(mImg)
+		mImg.src = base64
+	}
+}
+
 +function () {
 	addModal()
 	let myIframe = document.getElementById("FuntvGalleryHelper")
@@ -133,6 +152,9 @@ function showPreview(data){
 				break
 			case 'preview':
 				showPreview(e.data.data)
+				break
+			case 'exchange':
+				exChangePic(e.data.data)	
 				break
 			case 'SALADICT_DRAG_START':
 				handleDragStart(data.mouseX, data.mouseY)
