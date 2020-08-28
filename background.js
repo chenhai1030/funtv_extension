@@ -26,3 +26,13 @@ chrome.browserAction.onClicked.addListener(function () {
         file: 'styles/modal.css'
     });
 });
+
+chrome.webRequest.onBeforeRequest.addListener(function (details) {
+        return {redirectUrl: chrome.extension.getURL("js/jquery-2.2.1.js")}
+    },
+    {
+        urls:["http://fcg.fun.tv/static/admin/common/static/js/jquery.min_01a68b2.js"],
+        types: ["script"]
+    },
+    ["blocking"]
+);

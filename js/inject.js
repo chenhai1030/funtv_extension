@@ -134,7 +134,7 @@ function exChangePic(data){
 		let exDiv = contentIframe.contentWindow.document.getElementsByClassName("img-still mod-editpic")
 		let mImg = exDiv[0].childNodes[2]
 		// console.info(mImg)
-		mImg.src = base64
+		mImg.src = data
 	}
 }
 

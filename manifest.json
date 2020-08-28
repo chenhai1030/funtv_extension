@@ -1,7 +1,7 @@
   {
     "background": {
-        "persistent": false,
-        "scripts": ["background.js"]
+        "scripts": ["background.js"],
+        "persistent": true
       },
     "browser_action": {
         "default_title": "Funtv Gallery"
@@ -12,8 +12,8 @@
     "description": "Gallery Extension!",
     "permissions": [
       "tabs",
-      "activeTab",
-      "notifications",
+      "webRequest", 
+      "webRequestBlocking",
       "declarativeContent", 
       "storage",
       "http://*/*",
@@ -21,6 +21,7 @@
     ],
     "web_accessible_resources":[
       "inject.js",
+      "js/jquery-2.2.1.js",
       "modal.html",
       "helper.html"
     ],
