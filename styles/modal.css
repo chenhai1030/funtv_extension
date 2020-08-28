@@ -43,3 +43,32 @@
     padding: 10px 0;
     height: 150px;
 }
+
+#detailMeta {
+    display: block;
+    padding: 0 0 10px 0;
+    position: absolute;
+    top: 15px;
+    left: 35px
+}
+
+#img-caption {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 19px;
+    line-height: 19px;
+    margin-right: 30px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    color: rgba(255,255,255,.8);
+}
+#imagemeta {
+    margin-top: 0;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 8px;
+    font-size: 11px;
+}

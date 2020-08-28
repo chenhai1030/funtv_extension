@@ -81,15 +81,23 @@ function addModal(){
 		document.body.appendChild(modalDiv)
 	}
 	if (modalDiv){
-		modalDiv.innerHTML='<span id="FuntvModalClose">×</span><img id="funtv-modal-content"><div id="funtv-caption"></div>'
+		modalDiv.innerHTML='<div id="detailMeta"> \
+								<div id="img-caption"></div> \
+								<div id="imagemeta"> \
+									<div id="msz"></div>\
+								</div> \
+							</div>'
+		modalDiv.innerHTML += '<span id="FuntvModalClose">×</span><img id="funtv-modal-content">'
 		document.getElementById("FuntvModalClose").addEventListener("click", closeModal)
 	}
 }
 
-function showPreview(data){
+function showPreview(src, msz){
 	let modal = document.getElementById('FuntvModalDiv');
-	document.getElementById("funtv-modal-content").src = data
-	document.getElementById("funtv-caption").innerHTML = "我是xx"
+	document.getElementById("funtv-modal-content").src = src
+	console.info(src)
+	document.getElementById("img-caption").innerHTML = src.substring(src.lastIndexOf('/')+1)
+	document.getElementById("msz").innerHTML = msz
 	
 	if(modal){
 		modal.style.display = "block"
@@ -156,7 +164,7 @@ function exChangePic(data){
 				removeInjected() 
 				break
 			case 'preview':
-				showPreview(e.data.data)
+				showPreview(data.src, data.msz)
 				break
 			case 'exchange':
 				exChangePic(e.data.data)	

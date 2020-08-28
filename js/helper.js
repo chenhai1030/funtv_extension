@@ -1,7 +1,8 @@
-var imgarrs
-var timeoutID = null;
-var serverip = "http://172.17.3.201/"
-// var serverip = "http://172.17.7.11:8000/"
+{
+let imgarrs
+let timeoutID = null;
+// var serverip = "http://172.17.3.201/"
+let serverip = "http://172.17.7.11:8000/"
 
 let baseMouseX, baseMouseY = 0
 
@@ -122,9 +123,14 @@ function getItemNum(res){
 
 function showPreview(e){
     clearTimeout(timeoutID)
-    let data = e.path[0].attributes[0].nodeValue
+    let imgSrc = e.path[0].attributes[0].nodeValue
+    let msz = "1920 x 1080"
     timeoutID = window.setTimeout(function(){
-        sendMsg("preview", data)
+        // sendMsg("preview", data)
+        window.parent.postMessage({
+            cmd: "preview", 
+            src: imgSrc, 
+            msz: msz}, '*')
     }, 300);
 }
 
@@ -244,3 +250,4 @@ document.addEventListener('DOMContentLoaded', function(){
 document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('funtv-dragarea').addEventListener("mousedown", handleDragStart);
 });
+}
