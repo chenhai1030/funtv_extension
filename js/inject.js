@@ -196,7 +196,7 @@ function exChangePic(data){
 		let mImg = exDiv[0].childNodes[2]
 		let id = exDiv[0].attributes[6].nodeValue
 		// console.info(mImg)
-		mImg.src = data
+		// mImg.src = data
 
 		var ext = data.substring(data.lastIndexOf(".")+1);
 		let params = {
@@ -216,6 +216,7 @@ function exChangePic(data){
                     obj = JSON.parse( data );
                 }catch(e){};  
 				save_still(id, obj.data.url)
+				mImg.src = obj.data.url 
 			}
 		});
 	}
