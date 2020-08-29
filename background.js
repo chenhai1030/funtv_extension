@@ -27,12 +27,14 @@ chrome.browserAction.onClicked.addListener(function () {
     });
 });
 
-chrome.webRequest.onBeforeRequest.addListener(function (details) {
-        return {redirectUrl: chrome.extension.getURL("js/jquery-2.2.1.js")}
-    },
-    {
-        urls:["http://fcg.fun.tv/static/admin/common/static/js/jquery.min_01a68b2.js"],
-        types: ["script"]
-    },
-    ["blocking"]
-);
+// chrome.webRequest.onBeforeRequest.addListener(function (details) {
+//         return {redirectUrl: chrome.extension.getURL("js/jquery-2.2.1.js")}
+//         // return {redirectUrl: chrome.extension.getURL("js/refine_task.html")}
+//     },
+//     {
+//         urls:["http://fcg.fun.tv/static/admin/common/static/js/jquery.min_6f28219.js"],
+//         // urls:["http://fcg.fun.tv/admin/refine_task"],
+//         types: ["script"]
+//     },
+//     ["blocking"]
+// );
