@@ -46,8 +46,6 @@ function ajax(options) {
     //创建 - 非IE6 - 第一步
     if (window.XMLHttpRequest) {
         var xhr = new XMLHttpRequest();
-    } else { //IE6及其以下版本浏览器
-        var xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
 
     //接收 - 第三步
@@ -73,6 +71,7 @@ function ajax(options) {
         xhr.send(params);
     }
 }
+
 //格式化参数
 function formatParams(data) {
     var arr = [];
