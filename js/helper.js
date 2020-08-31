@@ -165,10 +165,10 @@ function prepareImg(num, resObj){
 
     if (num >0){
         for (let i=1; i<=6 && i <= num; i++){
-            if(i >= 1){
-                imgDiv.style.height = '120px'     
-            }else if (i > 2){
-                imgDiv.style.height = '220px'
+            if(i > 2){
+                imgDiv.style.height = '220px'     
+            }else if (i >= 1){
+                imgDiv.style.height = '120px'
             }
             let imgSrc = serverip + resObj.data[i-1].imgUrl
             createImg(imgSrc, i)
