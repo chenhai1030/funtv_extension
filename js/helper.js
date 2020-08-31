@@ -92,7 +92,7 @@ function switchShow(){
         // console.info("imgs:", len)
         if (len > 6){
             imgCheight = "450px"
-        }else if (len > 3){
+        }else if (len >= 3){
             imgCheight = "320px"
         }else if (len >= 1){
             imgCheight = "190px"
