@@ -11,10 +11,10 @@ function handleDragStart (evt) {
     baseMouseY = evt.clientY
 
     window.parent.postMessage({
-      cmd: 'SALADICT_DRAG_START',
-      mouseX: baseMouseX,
-      mouseY: baseMouseY
-    }, '*')
+        cmd: 'SALADICT_DRAG_START',
+        mouseX: baseMouseX,
+        mouseY: baseMouseY
+        }, '*') 
   
     document.addEventListener('mouseup', handleDragEnd)
     document.addEventListener('mousemove', handleMousemove)
@@ -22,10 +22,10 @@ function handleDragStart (evt) {
   
 function handleMousemove (evt) {
     window.parent.postMessage({
-      cmd: 'SALADICT_DRAG_MOUSEMOVE',
-      offsetX: evt.clientX - baseMouseX,
-      offsetY: evt.clientY - baseMouseY
-    }, '*')
+        cmd: 'SALADICT_DRAG_MOUSEMOVE',
+        offsetX: evt.clientX - baseMouseX,
+        offsetY: evt.clientY - baseMouseY
+        }, '*') 
 }
   
 function handleDragEnd () {

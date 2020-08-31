@@ -49,9 +49,10 @@ function formatParams(data) {
 }
 
 function handleDragStart (mouseX, mouseY) {
+	let myIframe = document.getElementById("FuntvGalleryHelper")
 	// 得出鼠标在上层的位置
-	pageMouseX = frameLeft + mouseX
-	pageMouseY = frameTop + mouseY
+	pageMouseX = mouseX
+	pageMouseY = mouseY
   
 	document.addEventListener('mouseup', handleDragEnd)
 	document.addEventListener('mousemove', handlePageMousemove)

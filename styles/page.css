@@ -7,21 +7,19 @@
 }
 
 .st-inspector {
-    opacity: .4;
+    /* opacity: .4; */
     border: none !important;
     position: fixed !important;
     width: 350px !important;
     /* height: 80px ; */
     top: 12px !important;
     right: 12px !important;
-    top: 12px;
-    right: 12px;
     /* z-index: 2147483647 !important; */
     z-index: 100;
 }
-.st-inspector:hover {
-    opacity: 1.0;
-}
+/* .st-inspector:hover {
+    opacity: 1.0; 
+} */
 
 .st-inspector iframe {
     width: 100%;
