@@ -136,6 +136,8 @@ function addModal(){
 							</div>'
 		modalDiv.innerHTML += '<span id="FuntvModalClose">×</span><img id="funtv-modal-content">'
 		document.getElementById("FuntvModalClose").addEventListener("click", closeModal)
+		// modalDiv.innerHTML += '<div id="navl" class="nav noforcus" tabindex="0"><span class="icon"></span></div>'
+		// modalDiv.innerHTML += '<div id="navr" class="nav noforcus" tabindex="0"><span class="icon"></span></div>'
 	}
 }
 

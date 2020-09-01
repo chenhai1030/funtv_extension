@@ -43,7 +43,6 @@
     padding: 10px 0;
     height: 150px;
 }
-
 #detailMeta {
     display: block;
     padding: 0 0 10px 0;
@@ -51,7 +50,6 @@
     top: 15px;
     left: 35px
 }
-
 #img-caption {
     display: block;
     white-space: nowrap;
@@ -71,4 +69,39 @@
     cursor: pointer;
     margin-top: 8px;
     font-size: 11px;
+}
+#navr.nav {
+    right: 0;
+    position: absolute;
+    height: 100%;
+    width: 60px;
+    top: 0;
+}
+.nofocus {
+    outline: 0;
+}
+#navr.nav .icon {
+    background-image: url(./res/navr.svg);
+}
+#navl.nav .icon {
+    background-image: url(./res/navl.svg);
+}
+.nav .icon {
+    left: 50%;
+}
+.nav .icon {
+    position: absolute;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    top: 50%;
+    padding: 0;
+    width: 42px;
+    height: 42px;
+    transition: all .25s cubic-bezier(.3,.55,.1,1);
+    margin-top: -15px;
+    -ms-opacity: .75;
+    opacity: .75;
+    -ms-background-repeat: no-repeat;
+    background-repeat: no-repeat;
 }
