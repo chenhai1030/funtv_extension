@@ -7,7 +7,15 @@ var serverip = "http://172.17.3.201/"
 let baseMouseX, baseMouseY = 0
 
 function handleDragStart (evt) {
-    console.info(evt.clientX, evt.clientY)
+    // console.info(evt.clientX, evt.clientY)
+    var obj = document.elementFromPoint(evt.clientX, evt.clientY);
+    if (obj.tagName.toLowerCase() === 'input') {
+        return
+    }
+    window.setTimeout(function(){
+        document.addEventListener('mouseup', handleDragEnd)
+        document.addEventListener('mousemove', handleMousemove)
+    }, 100)
     baseMouseX = evt.clientX
     baseMouseY = evt.clientY
     window.parent.postMessage({
@@ -15,11 +23,6 @@ function handleDragStart (evt) {
         mouseX: baseMouseX,
         mouseY: baseMouseY
         }, '*') 
-  
-    document.addEventListener('mouseup', handleDragEnd)
-    window.setTimeout(function(){
-        document.addEventListener('mousemove', handleMousemove)
-    }, 200)
 }
   
 function handleMousemove (evt) {
@@ -32,12 +35,11 @@ function handleMousemove (evt) {
 }
   
 function handleDragEnd () {
+    document.removeEventListener('mouseup', handleDragEnd)
+    document.removeEventListener('mousemove', handleMousemove)
     window.parent.postMessage({
       cmd: 'SALADICT_DRAG_END'
     }, '*')
-  
-    document.removeEventListener('mouseup', handleDragEnd)
-    document.removeEventListener('mousemove', handleMousemove)
 }
 
 function ajax(options) {
