@@ -1,5 +1,6 @@
 {
 let imgarrs
+let itemsToBeLoaded = 0
 let timeoutID = null;
 var serverip = "http://172.17.3.201/"
 // let serverip = "http://172.17.7.11:8000/"
@@ -128,7 +129,13 @@ function getItemNum(res){
 function showPreview(e){
     clearTimeout(timeoutID)
     let imgSrc = e.path[0].attributes[0].nodeValue
-    let msz = "1920 x 1080"
+    let imgName = imgSrc.substring(imgSrc.lastIndexOf('/')+1)
+    let msz = ""
+    for (let i = 0; i < imgarrs.length; i++){
+        if (imgName == imgarrs[i].imgName){
+            msz = imgarrs[i].dimensions
+        }
+    }
     timeoutID = window.setTimeout(function(){
         // sendMsg("preview", data)
         window.parent.postMessage({
@@ -213,7 +220,7 @@ function checkInfo(){
                 let resObj =  JSON.parse(response)
                 // console.info(resObj)
                 imgarrs = resObj.data
-                let imgNums = getItemNum(resObj)
+                let imgNums = itemsToBeLoaded = getItemNum(resObj)
                 prepareImg(imgNums, resObj)
             },
             fail: function (status) {
@@ -224,12 +231,16 @@ function checkInfo(){
 }
 
 function waterfall(imgarrs){
+    if (itemsToBeLoaded == 0){
+        return
+    }
     if (imgarrs.length > 7){
         for(let i=7; i< imgarrs.length; i++){
             let imgSrc = serverip + imgarrs[i].imgUrl
             createImg(imgSrc, i+1)
         }
-        imgarrs.length = 0
+        // imgarrs.length = 0
+        itemsToBeLoaded = 0
     }
 }
 
