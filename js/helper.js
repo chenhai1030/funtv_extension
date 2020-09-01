@@ -15,14 +15,14 @@ function handleDragStart (evt) {
     window.setTimeout(function(){
         document.addEventListener('mouseup', handleDragEnd)
         document.addEventListener('mousemove', handleMousemove)
-    }, 100)
+    }, 200)
     baseMouseX = evt.clientX
     baseMouseY = evt.clientY
     window.parent.postMessage({
         cmd: 'SALADICT_DRAG_START',
         mouseX: baseMouseX,
         mouseY: baseMouseY
-        }, '*') 
+    }, '*') 
 }
   
 function handleMousemove (evt) {
@@ -152,9 +152,9 @@ function createImg(src, i){
     img.style.width = "150px"
     img.style.height = "112px"
     if (i%2==0){
-        img.style.marginLeft="5px"
+        img.style.marginLeft="1px"
     }else{
-        img.style.marginRight="5px"
+        img.style.marginRight="1px"
     }
     imgDiv.appendChild(img)
     document.getElementById(img.id).addEventListener("click", showPreview)
@@ -186,7 +186,7 @@ function prepareImg(num, resObj){
             let img = document.createElement("img")
             img.src = serverip + resObj.data[6].imgUrl
             img.id = "img7"
-            img.style.marginRight="5px"
+            img.style.marginRight="1px"
             img.style.width = "150px"
             img.style.height = "112px"
             imgDiv.appendChild(img)
