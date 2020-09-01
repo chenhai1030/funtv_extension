@@ -7,9 +7,9 @@ var serverip = "http://172.17.3.201/"
 let baseMouseX, baseMouseY = 0
 
 function handleDragStart (evt) {
+    console.info(evt.clientX, evt.clientY)
     baseMouseX = evt.clientX
     baseMouseY = evt.clientY
-
     window.parent.postMessage({
         cmd: 'SALADICT_DRAG_START',
         mouseX: baseMouseX,
@@ -17,15 +17,18 @@ function handleDragStart (evt) {
         }, '*') 
   
     document.addEventListener('mouseup', handleDragEnd)
-    document.addEventListener('mousemove', handleMousemove)
+    window.setTimeout(function(){
+        document.addEventListener('mousemove', handleMousemove)
+    }, 200)
 }
   
 function handleMousemove (evt) {
+    arguments[0].preventDefault();
     window.parent.postMessage({
         cmd: 'SALADICT_DRAG_MOUSEMOVE',
         offsetX: evt.clientX - baseMouseX,
         offsetY: evt.clientY - baseMouseY
-        }, '*') 
+    }, '*') 
 }
   
 function handleDragEnd () {
@@ -173,7 +176,7 @@ function prepareImg(num, resObj){
             let imgSrc = serverip + resObj.data[i-1].imgUrl
             createImg(imgSrc, i)
         }
-        if (num >= 6){
+        if (num >= 5){
             imgDiv.style.height = '350px'
             imgDiv.style.overflow = 'scroll'
         }

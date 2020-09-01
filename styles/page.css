@@ -28,7 +28,7 @@
     border: none !important;
 }
 
-.st-inspector:before {
+/* .st-inspector:before {
     display: block;
     content: ' ';
     width: 100px;
@@ -37,7 +37,7 @@
     cursor: all-scroll;
     position: absolute;
     height: 36px;
-}
+} */
 
 .st-inspector.draggable:before {
     position:fixed;
