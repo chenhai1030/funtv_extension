@@ -13,10 +13,7 @@ function handleDragStart (evt) {
     if (obj.tagName.toLowerCase() === 'input') {
         return
     }
-    window.setTimeout(function(){
-        document.addEventListener('mouseup', handleDragEnd)
-        document.addEventListener('mousemove', handleMousemove)
-    }, 200)
+
     baseMouseX = evt.clientX
     baseMouseY = evt.clientY
     window.parent.postMessage({
@@ -24,6 +21,8 @@ function handleDragStart (evt) {
         mouseX: baseMouseX,
         mouseY: baseMouseY
     }, '*') 
+    document.addEventListener('mouseup', handleDragEnd)
+    document.addEventListener('mousemove', handleMousemove)
 }
   
 function handleMousemove (evt) {
