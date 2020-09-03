@@ -67,8 +67,8 @@ function handleDragStart (mouseX, mouseY) {
   
   function handleFrameMousemove (offsetX, offsetY) {
 	let myIframe = document.getElementById("FuntvGalleryHelper")
-	frameTop += offsetY
-	frameLeft += offsetX
+	frameTop += offsetY 
+	frameLeft += offsetX 
 	myIframe.style.top = frameTop + 'px'
 	myIframe.style.left = frameLeft + 'px'
   
@@ -81,8 +81,8 @@ function handleDragStart (mouseX, mouseY) {
 	let myIframe = document.getElementById("FuntvGalleryHelper")
 	frameTop += evt.clientX - pageMouseX
 	frameLeft += evt.clientY - pageMouseY
-	myIframe.style.top = frameTop + 'px'
-	myIframe.style.left = frameLeft + 'px'
+	// myIframe.style.top = frameTop + 'px'
+	// myIframe.style.left = frameLeft + 'px'
   
 	// 新位置直接可以更新
 	pageMouseX = evt.clientX
@@ -136,8 +136,11 @@ function addModal(){
 							</div>'
 		modalDiv.innerHTML += '<span id="FuntvModalClose">×</span><img id="funtv-modal-content">'
 		document.getElementById("FuntvModalClose").addEventListener("click", closeModal)
+
 		// modalDiv.innerHTML += '<div id="navl" class="nav noforcus" tabindex="0"><span class="icon"></span></div>'
 		// modalDiv.innerHTML += '<div id="navr" class="nav noforcus" tabindex="0"><span class="icon"></span></div>'
+		// document.querySelector("#navl > span").style.backgroundImage = chrome.extension.getURL ('./styles/res/navl.svg')
+		// document.querySelector("#navr > span").style.backgroundImage = chrome.extension.getURL ('./styles/res/navr.svg')
 	}
 }
 
