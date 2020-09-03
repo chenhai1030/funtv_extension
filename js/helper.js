@@ -2,8 +2,9 @@
 let imgarrs
 let itemsToBeLoaded = 0
 let timeoutID = null;
-var serverip = "http://172.17.3.201/"
+// var serverip = "http://172.17.3.201/"
 // let serverip = "http://172.17.7.11:8000/"
+let serverip = "http://172.17.5.90/"
 
 let baseMouseX, baseMouseY = 0
 
